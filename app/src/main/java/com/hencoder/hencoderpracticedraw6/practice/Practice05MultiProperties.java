@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.hencoder.hencoderpracticedraw6.R;
+import com.hencoder.hencoderpracticedraw6.Utils;
 
 public class Practice05MultiProperties extends ConstraintLayout {
     Button animateBt;
@@ -26,6 +28,8 @@ public class Practice05MultiProperties extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    private boolean flag = true;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -38,7 +42,22 @@ public class Practice05MultiProperties extends ConstraintLayout {
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                ViewPropertyAnimator animator=imageView.animate();
                 // TODO 在这里处理点击事件，同时对多个属性做动画
+                if (flag) {
+                    animator.translationX(Utils.dpToPixel(200))
+                            .alpha(1)
+                            .scaleX(1)
+                            .scaleY(1)
+                            .rotation(360);
+                } else {
+                    animator.translationX(0)
+                            .alpha(0)
+                            .scaleX(0)
+                            .scaleY(0)
+                            .rotation(0);
+                }
+                flag = !flag;
             }
         });
     }

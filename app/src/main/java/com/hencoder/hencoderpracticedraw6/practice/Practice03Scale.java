@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,6 +27,8 @@ public class Practice03Scale extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    private int count=1;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -37,6 +40,24 @@ public class Practice03Scale extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
+                ViewPropertyAnimator animator=imageView.animate();
+                switch (count) {
+                    case 1:
+                        animator.scaleX(1.5f);
+                        break;
+                    case 2:
+                        animator.scaleX(1);
+                        break;
+                    case 3:
+                        animator.scaleY(1.5f);
+                        break;
+                    case 4:
+                        animator.scaleY(1);
+                        break;
+                    default:break;
+                }
+                count++;
+                if (count>4) count=1;
             }
         });
     }
